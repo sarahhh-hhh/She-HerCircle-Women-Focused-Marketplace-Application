@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "389677615356",
+    "project_id": "shehercircle",
+    "storage_bucket": "shehercircle.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389677615356:android:33ff97057be81444262f79",
+        "android_client_info": {
+          "package_name": "com.example.she_her_circle"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBw-bM3HL3BMnLRitaJ779Sj2jO6v5iz6Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

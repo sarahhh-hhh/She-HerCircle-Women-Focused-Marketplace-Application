@@ -1,0 +1,41 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isBuyer(resourceData) {
+      return request.auth != null && request.auth.uid == resourceData.buyerId;
+    }
+
+    function isSeller(resourceData) {
+      return request.auth != null && request.auth.uid == resourceData.sellerId;
+    }
+
+    function validBuyerTransition(from, to) {
+      return (from == 'accepted' && to == 'paid') ||
+             (from == 'shipped' && to == 'complete');
+    }
+
+    function validSellerTransition(from, to) {
+      return (from == 'pending' && (to == 'accepted' || to == 'canceled')) ||
+             (from == 'accepted' && (to == 'shipped' || to == 'canceled')) ||
+             (from == 'paid' && to == 'shipped');
+    }
+
+    match /orders/{orderId} {
+      allow read: if request.auth != null &&
+        (isBuyer(resource.data) || isSeller(resource.data));
+
+      allow create: if request.auth != null &&
+        request.resource.data.buyerId == request.auth.uid &&
+        request.resource.data.status == 'pending';
+
+      allow update: if request.auth != null && (
+        (isBuyer(resource.data) && validBuyerTransition(resource.data.status, request.resource.data.status)) ||
+        (isSeller(resource.data) && validSellerTransition(resource.data.status, request.resource.data.status))
+      ) && request.resource.data.diff(resource.data).changedKeys().hasOnly([
+        'status', 'paymentIntentId', 'updatedAt', 'shippingInfo'
+      ]);
+
+      allow delete: if false;
+    }
+  }
+}

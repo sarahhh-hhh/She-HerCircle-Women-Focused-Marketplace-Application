@@ -1,0 +1,25 @@
+name: she_her_circle
+description: A simple Flutter app demo for She&HerCircle
+publish_to: 'none'
+version: 0.1.0+1
+environment:
+  sdk: ">=2.18.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  firebase_core: ^3.6.0
+  firebase_auth: ^5.3.1
+  cloud_firestore: ^5.4.4
+  firebase_storage: ^12.3.4
+  image_picker: ^1.0.4
+  image: ^4.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
