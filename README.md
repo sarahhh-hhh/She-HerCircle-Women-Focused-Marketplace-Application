@@ -1,4 +1,4 @@
-# she_her_circle
+# She&HerCircle: Women-Focused Marketplace Application
 
 A new Flutter project.
 
